@@ -1,0 +1,22 @@
+<resources>
+    <string name="app_name">RebruX</string>
+    <string name="str_app_name_footer">save the nature app</string>
+    <string name="str_welcome">Welcome</string>
+    <string name="str_btn_sign">Sign Up</string>
+    <string name="str_input_password">password</string>
+    <string name="str_input_email">email</string>
+    <string name="str_input_name">name</string>
+    <string name="str_input_username">username</string>
+    <string name="str_already_acc">Already have an account, </string>
+    <string name="str_forgot_password">Forgot, </string>
+    <string name="str_btn_login">Log in</string>
+    <string name="str_btn_fotgot_password">Password?</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="str_welcome_back">Welcome\nback!</string>
+    <string name="str_dont_have_acc">Don’t have an account, </string>
+    <string name="str_btn_register">Register</string>
+    <string name="str_btn_send">Send</string>
+    <string name="str_or">or</string>
+    <string name="str_forgotpassword">Forgot password</string>
+</resources>

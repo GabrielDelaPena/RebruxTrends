@@ -66,6 +66,8 @@ public class AddFragment extends Fragment {
     File imageFile;
     int status;
 
+    // u zus 3
+
     @Override
     public View onCreateView(
             LayoutInflater inflater, ViewGroup container,

@@ -1,16 +1,24 @@
 package be.ehb.rebruxdef.fragments;
 
+import static android.app.Activity.RESULT_OK;
 import static be.ehb.rebruxdef.fragments.LoginFragment.userID;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.content.Intent;
+import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
+import android.provider.MediaStore;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -38,16 +46,19 @@ import okhttp3.RequestBody;
 public class DetailsFragment extends Fragment {
 
     private FragmentDetailsBinding binding;
+    ImageView imageView;
     TextView creator, street, zip, city, status, createdAt, description;
     Button btnCleaned;
     Reports report = new Reports();
     int responseStatus;
     int StatusDelete;
+    private static final int SELECT_IMAGE = 1;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         binding = FragmentDetailsBinding.inflate(inflater, container, false);
+        imageView = binding.imageView2;
         creator = binding.tvDetailsCreator;
         street = binding.tvDetailsStreet;
         zip = binding.tvDetailsZip;
@@ -79,6 +90,12 @@ public class DetailsFragment extends Fragment {
                     }, 10000);
                 }
         );
+
+        onGetImage(bundle);
+
+//        Intent intent = new Intent(Intent.ACTION_PICK);
+//        intent.setType("image/*");
+//        startActivityForResult(intent, SELECT_IMAGE);
 
     }
 
@@ -214,6 +231,61 @@ public class DetailsFragment extends Fragment {
         fragmentTransaction.replace(R.id.frame_layout, fragment);
         fragmentTransaction.commit();
     }
+
+    public void onGetImage(Bundle bundle) {
+        String[] projection = new String[] {
+                MediaStore.Images.Media._ID,
+                MediaStore.Images.Media.DISPLAY_NAME,
+                MediaStore.Images.Media.DATA
+        };
+
+        String selection = MediaStore.Images.Media.DISPLAY_NAME + " = ?";
+        String[] selectionArgs = new String[] { bundle.getString("imageTitle") + ".jpg" };
+
+        Cursor cursor = getActivity().getContentResolver().query(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, projection, selection, selectionArgs, null);
+
+        if (cursor != null && cursor.moveToFirst()) {
+            // If the cursor is not empty and the image was found, we can get its ID, display name, and data from the cursor
+            int idColumn = cursor.getColumnIndexOrThrow(MediaStore.Images.Media._ID);
+            int displayNameColumn = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DISPLAY_NAME);
+            int dataColumn = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
+
+            long id = cursor.getLong(idColumn);
+            String displayName = cursor.getString(displayNameColumn);
+            String data = cursor.getString(dataColumn);
+
+            Bitmap bitmap = BitmapFactory.decodeFile(data);
+            imageView.setImageBitmap(bitmap);
+
+            // You can use the ID, display name, and data to display the image or perform other actions with it
+            // ...
+        } else {
+            int imageResource = R.drawable.trash;
+            Bitmap bitmap = BitmapFactory.decodeResource(getResources(), imageResource);
+            imageView.setImageBitmap(bitmap);
+        }
+    }
+
+//    @Override
+//    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+//        super.onActivityResult(requestCode, resultCode, data);
+//        if (requestCode == SELECT_IMAGE && resultCode == RESULT_OK && data != null) {
+//            Uri selectedImage = data.getData();
+//            String[] filePathColumn = {MediaStore.Images.Media.DISPLAY_NAME};
+//            Cursor cursor = getActivity().getContentResolver().query(selectedImage,
+//                    filePathColumn, null, null, null);
+//            cursor.moveToFirst();
+//            int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
+//            String picturePath = cursor.getString(columnIndex);
+//            cursor.close();
+//            try {
+//                Bitmap bitmap = MediaStore.Images.Media.getBitmap(getActivity().getContentResolver(), selectedImage);
+//                imageView.setImageBitmap(bitmap);
+//            } catch (IOException e) {
+//                e.printStackTrace();
+//            }
+//        }
+//    }
 
     @Override
     public void onDestroyView() {

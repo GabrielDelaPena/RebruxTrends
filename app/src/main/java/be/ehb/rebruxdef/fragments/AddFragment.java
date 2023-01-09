@@ -4,12 +4,16 @@ import static be.ehb.rebruxdef.fragments.LoginFragment.userID;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
+import android.content.ContentValues;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Camera;
+import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
+import android.os.Environment;
 import android.provider.MediaStore;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -25,6 +29,7 @@ import android.location.Geocoder;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
 import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
@@ -65,6 +70,10 @@ public class AddFragment extends Fragment {
     TextView tv_street, tv_zip, tv_city, tv_lat, tv_lon, tv_userID;
     File imageFile;
     int status;
+    Bitmap imageBitmap;
+    long timeInSeconds = System.currentTimeMillis() / 1000;
+    String timeInSecondsString = Long.toString(timeInSeconds);
+    String capturedImage;
 
     // u zus 3
 
@@ -104,8 +113,9 @@ public class AddFragment extends Fragment {
 
         save.setOnClickListener(
                 (View v) -> {
-                    //onAddReportCall();
-                    onTestingImage();
+                    onAddReportCall();
+                    //onTestingImage();
+                    //onSaveImageGallery(imageBitmap, timeInSecondsString);
                 }
         );
 
@@ -138,7 +148,7 @@ public class AddFragment extends Fragment {
                     MediaType mediaType = MediaType.parse("application/json");
                     RequestBody body = RequestBody.create(mediaType,
                             "{\r\n    \"creator\": \"" + userID +
-                            "\",\r\n    \"image\": \"" + image.getText().toString() +
+                            "\",\r\n    \"image\": \"" + timeInSecondsString +
                             "\",\r\n    \"description\": \"" + description.getText().toString() +
                             "\",\r\n    \"street\": \"" + street + " " + number +
                             "\",\r\n    \"city\": \"" + city +
@@ -152,6 +162,7 @@ public class AddFragment extends Fragment {
                             .build();
                     int response = client.newCall(request).execute().code();
                     status = response;
+                    onSaveImageGallery(imageBitmap, timeInSecondsString);
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
@@ -206,11 +217,13 @@ public class AddFragment extends Fragment {
         }
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.Q)
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         if (requestCode == 101) {
             try {
                 Bitmap bitmap = (Bitmap) data.getExtras().get("data");
+                imageBitmap = bitmap;
                 File outputFile = new File(getActivity().getExternalFilesDir(null), "image.jpg");
                 OutputStream outputStream = new FileOutputStream(outputFile);
                 bitmap.compress(Bitmap.CompressFormat.JPEG, 100, outputStream);
@@ -224,6 +237,29 @@ public class AddFragment extends Fragment {
             }
         }
         Toast.makeText(getActivity(), String.valueOf(imageFile), Toast.LENGTH_SHORT).show();
+    }
+
+    public void onSaveImageGallery(Bitmap dataBitmap, String imageTitle) {
+        ContentValues values = new ContentValues();
+        values.put(MediaStore.Images.Media.DISPLAY_NAME, imageTitle);
+        values.put(MediaStore.Images.Media.MIME_TYPE, "image/jpeg");
+        values.put(MediaStore.Images.Media.RELATIVE_PATH, "Pictures/Rebrux");
+        values.put(MediaStore.Images.Media.IS_PENDING, true);
+
+        Thread thread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                Uri uri = getActivity().getContentResolver().insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, values);
+                try (OutputStream out = getActivity().getContentResolver().openOutputStream(uri)) {
+                    dataBitmap.compress(Bitmap.CompressFormat.JPEG, 100, out);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                values.put(MediaStore.Images.Media.IS_PENDING, false);
+                getActivity().getContentResolver().update(uri, values, null, null);
+            }
+        });
+        thread.start();
     }
 
     public void onTestingImage() {

@@ -61,6 +61,7 @@ public class ReportAdapter extends RecyclerView.Adapter<ReportAdapter.ReportView
         Reports current = items.get(position);
         Bundle bundle = new Bundle();
         bundle.putString("key", current.getId());
+        bundle.putString("imageTitle", current.getImage());
         holder.date.setText(current.getCreatedAt());
         holder.street.setText(current.getStreet());
         holder.city.setText(current.getCity());

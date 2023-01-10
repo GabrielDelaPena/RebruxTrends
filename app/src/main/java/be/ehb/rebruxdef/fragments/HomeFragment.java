@@ -36,6 +36,7 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
@@ -83,6 +84,18 @@ public class HomeFragment extends Fragment {
             showReportsOnMap();
             getCurrentLocation();
 //            onTestingLocation();
+
+            final GoogleMap.OnMarkerClickListener onMarkerClickListener = new GoogleMap.OnMarkerClickListener() {
+                @Override
+                public boolean onMarkerClick(Marker marker) {
+                    Bundle bundle = new Bundle();
+                    bundle.putString("key", marker.getTitle());
+                    bundle.putString("imageTitle", "Test image");
+                    replaceFragment(new DetailsFragment(), bundle);
+                    return true;
+                }
+            };
+            mGoogleMap.setOnMarkerClickListener(onMarkerClickListener);
         }
 
     };
@@ -120,6 +133,14 @@ public class HomeFragment extends Fragment {
         super.onDestroyView();
         binding.mapView.onDestroy();
         binding = null;
+    }
+
+    private void replaceFragment(Fragment fragment, Bundle bundle) {
+        fragment.setArguments(bundle);
+        FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.replace(R.id.frame_layout, fragment);
+        fragmentTransaction.commit();
     }
 
     public void showReportsOnMap() {
@@ -175,7 +196,7 @@ public class HomeFragment extends Fragment {
             thread.join();
 
             for (int i = 0; i < reports.size(); i++) {
-                drawAnnotations(reports.get(i).getLat(), reports.get(i).getLng(), reports.get(i).getStreet());
+                drawAnnotations(reports.get(i).getLat(), reports.get(i).getLng(), reports.get(i).getId());
             }
 
         } catch (InterruptedException e) {
@@ -183,12 +204,12 @@ public class HomeFragment extends Fragment {
         }
     }
 
-    private void drawAnnotations(double lat, double lng, String street) {
+    private void drawAnnotations(double lat, double lng, String id) {
         LatLng coordGroteMarkt = new LatLng(lat,lng);
 
         mGoogleMap.addMarker(new MarkerOptions()
                 .position(coordGroteMarkt)
-                .title(street)
+                .title(id)
                 .icon(BitmapDescriptorFactory.defaultMarker(200))
         );
     }
@@ -216,4 +237,5 @@ public class HomeFragment extends Fragment {
             }
         });
     }
+
 }

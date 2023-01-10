@@ -113,6 +113,7 @@ public class AddFragment extends Fragment {
 
         save.setOnClickListener(
                 (View v) -> {
+                    onSaveImageGallery(imageBitmap, timeInSecondsString);
                     onAddReportCall();
                     //onTestingImage();
                     //onSaveImageGallery(imageBitmap, timeInSecondsString);
@@ -162,7 +163,6 @@ public class AddFragment extends Fragment {
                             .build();
                     int response = client.newCall(request).execute().code();
                     status = response;
-                    onSaveImageGallery(imageBitmap, timeInSecondsString);
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
@@ -205,16 +205,6 @@ public class AddFragment extends Fragment {
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.replace(R.id.frame_layout, fragment);
         fragmentTransaction.commit();
-    }
-
-    public void getBottomNav() {
-        FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
-        ReportsFragment reportsFragment = (ReportsFragment) fragmentManager.findFragmentByTag("ReportsFragment");
-        if (reportsFragment != null) {
-            Toast.makeText(getActivity(), "Start exist", Toast.LENGTH_LONG).show();
-        } else {
-            Toast.makeText(getActivity(), "Start does not exist", Toast.LENGTH_LONG).show();
-        }
     }
 
     @RequiresApi(api = Build.VERSION_CODES.Q)

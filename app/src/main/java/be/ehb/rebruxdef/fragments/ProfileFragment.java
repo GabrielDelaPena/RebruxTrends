@@ -14,6 +14,7 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.lifecycle.MutableLiveData;
 import androidx.navigation.fragment.NavHostFragment;
 
 import org.json.JSONArray;
@@ -25,6 +26,7 @@ import java.util.ArrayList;
 
 import be.ehb.rebruxdef.R;
 import be.ehb.rebruxdef.databinding.FragmentProfileBinding;
+import be.ehb.rebruxdef.models.Reports;
 import be.ehb.rebruxdef.models.User;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
@@ -34,6 +36,7 @@ public class ProfileFragment extends Fragment {
     private FragmentProfileBinding binding;
     TextView tv_username, tv_email, tv_phone, tv_points;
     User user = new User();
+    int reportsLength;
 
     @Override
     public View onCreateView(
@@ -52,6 +55,7 @@ public class ProfileFragment extends Fragment {
 
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        getReports();
 
         Thread thread = new Thread(new Runnable() {
             @Override
@@ -103,7 +107,12 @@ public class ProfileFragment extends Fragment {
 
         binding.btnProfileReports.setOnClickListener(
                 (View v) -> {
-                    replaceFragment(new ReportsFragment(), "ReportsFragment");
+                    Log.d("REPORTS LENGTH", String.valueOf(reportsLength));
+                    if (reportsLength > 0) {
+                        replaceFragment(new ReportsFragment(), "ReportsFragment");
+                    } else {
+                        Toast.makeText(getActivity(), "User has no reports yet, pls add one", Toast.LENGTH_SHORT).show();
+                    }
                 }
         );
 
@@ -137,4 +146,37 @@ public class ProfileFragment extends Fragment {
         super.onDestroyView();
         binding = null;
     }
+
+    public int getReports() {
+        Thread thread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+
+                try {
+                    OkHttpClient client = new OkHttpClient().newBuilder()
+                            .build();
+
+                    Request request = new Request.Builder()
+                            .url("https://rebrux-backend-node-side.onrender.com/api/reports/" + userID)
+                            .get()
+                            .build();
+                    String response = client.newCall(request).execute().body().string();
+
+                    if (response.equals("No reports for this user.")) {
+                        Log.d("GETREPORT", "HAS NO REPORTS");
+                    } else {
+                        Log.d("GETREPORT", "HAS REPORTS");
+                        JSONArray reportsRaw = new JSONArray(response);
+                        reportsLength = reportsRaw.length();
+                    }
+
+                } catch (IOException | JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+        thread.start();
+        return reportsLength;
+    }
+
 }

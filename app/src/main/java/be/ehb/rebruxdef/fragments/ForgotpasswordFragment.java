@@ -1,57 +1,47 @@
 package be.ehb.rebruxdef.fragments;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-import androidx.navigation.Navigation;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
+import android.widget.EditText;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+import androidx.navigation.fragment.NavHostFragment;
 
 import be.ehb.rebruxdef.R;
+import be.ehb.rebruxdef.databinding.FragmentForgotpasswordBinding;
 
-public class ForgotpasswordFragment extends Fragment implements View.OnClickListener {
+public class ForgotpasswordFragment extends Fragment {
 
-    public ForgotpasswordFragment() {
-        // Required empty public constructor
-    }
+    private FragmentForgotpasswordBinding binding;
+    EditText email;
 
-    public static ForgotpasswordFragment newInstance() {
-        ForgotpasswordFragment fragment = new ForgotpasswordFragment();
-        Bundle args = new Bundle();
-        fragment.setArguments(args);
-        return fragment;
-    }
-
+    @Nullable
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        binding = FragmentForgotpasswordBinding.inflate(inflater, container, false);
+        email = binding.inputEmailForgotpassword;
+        return binding.getRoot();
     }
 
+    @SuppressLint("SetTextI18n")
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        View mView = inflater.inflate(R.layout.fragment_forgotpassword, container, false);
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        Bundle bundle = new Bundle();
 
-        Button buttonRegistertoLogin = mView.findViewById(R.id.btn_register_to_login);
-        buttonRegistertoLogin.setOnClickListener(this);
-        Button buttonLoginRegister = mView.findViewById(R.id.btn_login_to_register);
-        buttonLoginRegister.setOnClickListener(this);
+        binding.btnSend.setOnClickListener(
+                (View v) -> {
+                    bundle.putString("email", email.getText().toString());
+                    NavHostFragment.findNavController(ForgotpasswordFragment.this)
+                            .navigate(R.id.action_forgotpasswordFragment_to_changePasswordFragment, bundle);
+                }
+        );
 
-        return mView;
     }
 
-    @Override
-    public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.btn_register_to_login:
-                Navigation.findNavController(v).navigate(R.id.action_forgotpassword_to_login);
-                break;
-            case R.id.btn_login_to_register:
-                Navigation.findNavController(v).navigate(R.id.action_forgotpassword_to_register);
-                break;
-        }
-    }
 }

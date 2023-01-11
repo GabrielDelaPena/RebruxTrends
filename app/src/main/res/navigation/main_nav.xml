@@ -46,6 +46,9 @@
         <action
             android:id="@+id/action_forgotpassword_to_register"
             app:destination="@id/registerFragment" />
+        <action
+            android:id="@+id/action_forgotpasswordFragment_to_changePasswordFragment"
+            app:destination="@id/changePasswordFragment" />
     </fragment>
     <fragment
         android:id="@+id/homeFragment"
@@ -72,6 +75,14 @@
         android:label="ProfileFragment" >
         <action
             android:id="@+id/action_profileFragment_to_loginFragment"
+            app:destination="@id/loginFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/changePasswordFragment"
+        android:name="be.ehb.rebruxdef.fragments.ChangePasswordFragment"
+        android:label="ChangePasswordFragment" >
+        <action
+            android:id="@+id/action_changePasswordFragment_to_loginFragment"
             app:destination="@id/loginFragment" />
     </fragment>
 </navigation>

@@ -48,11 +48,18 @@ public class RegisterFragment extends Fragment {
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        binding.btnRegisterToForgotpassword.setOnClickListener(
+            (View v) -> {
+                NavHostFragment.findNavController(RegisterFragment.this)
+                        .navigate(R.id.action_register_to_forgotpassword);
+            }
+        );
+
         binding.btnRegisterToLogin.setOnClickListener(
-                (View v) -> {
-                    NavHostFragment.findNavController(RegisterFragment.this)
-                            .navigate(R.id.action_register_to_login);
-                }
+            (View v) -> {
+                NavHostFragment.findNavController(RegisterFragment.this)
+                        .navigate(R.id.action_register_to_login);
+            }
         );
 
         binding.btnSingup.setOnClickListener(

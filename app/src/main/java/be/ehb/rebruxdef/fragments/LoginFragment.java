@@ -62,6 +62,13 @@ public class LoginFragment extends Fragment {
             Log.d("CURRENT_USER", "USER IS NULL");
         }
 
+        binding.btnLoginToForgotpassword.setOnClickListener(
+                (View v) -> {
+                    NavHostFragment.findNavController(LoginFragment.this)
+                            .navigate(R.id.action_login_to_forgotpassword);
+                }
+        );
+
         binding.btnLoginToRegister.setOnClickListener(
                 (View v) -> {
                     NavHostFragment.findNavController(LoginFragment.this)

@@ -90,7 +90,7 @@ public class HomeFragment extends Fragment {
                 public boolean onMarkerClick(Marker marker) {
                     Bundle bundle = new Bundle();
                     bundle.putString("key", marker.getTitle());
-                    bundle.putString("imageTitle", "Test image");
+                    bundle.putString("imageTitle", marker.getSnippet());
                     replaceFragment(new DetailsFragment(), bundle);
                     return true;
                 }
@@ -196,7 +196,7 @@ public class HomeFragment extends Fragment {
             thread.join();
 
             for (int i = 0; i < reports.size(); i++) {
-                drawAnnotations(reports.get(i).getLat(), reports.get(i).getLng(), reports.get(i).getId());
+                drawAnnotations(reports.get(i).getLat(), reports.get(i).getLng(), reports.get(i).getId(), reports.get(i).getImage());
             }
 
         } catch (InterruptedException e) {
@@ -204,12 +204,13 @@ public class HomeFragment extends Fragment {
         }
     }
 
-    private void drawAnnotations(double lat, double lng, String id) {
+    private void drawAnnotations(double lat, double lng, String id, String imageTitle) {
         LatLng coordGroteMarkt = new LatLng(lat,lng);
 
         mGoogleMap.addMarker(new MarkerOptions()
                 .position(coordGroteMarkt)
                 .title(id)
+                .snippet(imageTitle)
                 .icon(BitmapDescriptorFactory.defaultMarker(200))
         );
     }

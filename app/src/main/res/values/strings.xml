@@ -24,4 +24,10 @@
     <string name="str_btn_my_reports">My Reports</string>
     <string name="str_btn_logout">Logout</string>
     <string name="str_btn_details">Details</string>
+    <string name="str_input_phone_number">phone number</string>
+    <string name="str_edit_profile">Edit Profile</string>
+    <string name="str_save">Save</string>
+    <string name="str_btn_change_password">Change Password</string>
+    <string name="str_input_new_password">new password</string>
+    <string name="str_input_confirm_password">confirm password</string>
 </resources>

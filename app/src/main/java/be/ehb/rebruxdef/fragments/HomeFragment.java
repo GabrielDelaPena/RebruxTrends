@@ -7,6 +7,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.graphics.drawable.Drawable;
 import android.location.Location;
 import android.os.Bundle;
 import android.util.Log;
@@ -196,7 +197,7 @@ public class HomeFragment extends Fragment {
             thread.join();
 
             for (int i = 0; i < reports.size(); i++) {
-                drawAnnotations(reports.get(i).getLat(), reports.get(i).getLng(), reports.get(i).getId(), reports.get(i).getImage());
+                drawAnnotations(reports.get(i).getLat(), reports.get(i).getLng(), reports.get(i).getId(), reports.get(i).getImage(), reports.get(i).getCleaned());
             }
 
         } catch (InterruptedException e) {
@@ -204,14 +205,20 @@ public class HomeFragment extends Fragment {
         }
     }
 
-    private void drawAnnotations(double lat, double lng, String id, String imageTitle) {
+    private void drawAnnotations(double lat, double lng, String id, String imageTitle, Boolean isCleaned) {
         LatLng coordGroteMarkt = new LatLng(lat,lng);
+        int icon;
+        if (isCleaned) {
+            icon = R.drawable.ic_map_green;
+        } else {
+            icon = R.drawable.ic_map_red;
+        }
 
         mGoogleMap.addMarker(new MarkerOptions()
                 .position(coordGroteMarkt)
                 .title(id)
                 .snippet(imageTitle)
-                .icon(BitmapDescriptorFactory.defaultMarker(200))
+                .icon(BitmapDescriptorFactory.fromResource(icon))
         );
     }
 

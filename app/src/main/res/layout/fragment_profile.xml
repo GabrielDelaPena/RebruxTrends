@@ -63,6 +63,7 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout2"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
@@ -107,7 +108,7 @@
             android:layout_marginTop="24dp"
             android:drawableLeft="@drawable/ic_baseline_money_24"
             android:drawablePadding="20dp"
-            android:text="50 000"
+            android:text="0"
             android:textSize="25sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tv_profile_number" />
@@ -117,26 +118,26 @@
         android:id="@+id/btn_profile_logout"
         android:layout_width="100dp"
         android:layout_height="60dp"
-        android:layout_marginEnd="8dp"
+        android:layout_marginTop="255dp"
+        android:layout_marginEnd="32dp"
         android:text="Logout"
         android:textSize="14sp"
         app:backgroundTint="@color/green"
         app:cornerRadius="30sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.613"
-        app:layout_constraintStart_toEndOf="@+id/btn_profile_reports"
-        tools:layout_editor_absoluteY="533dp" />
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout2" />
 
     <Button
         android:id="@+id/btn_profile_reports"
         android:layout_width="140dp"
         android:layout_height="60dp"
-        android:layout_marginStart="16dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="255dp"
         android:text="Reports"
         android:textSize="20sp"
         app:backgroundTint="@color/green"
         app:cornerRadius="30dp"
-        app:layout_constraintStart_toEndOf="@+id/btn_profile_edit"
-        tools:layout_editor_absoluteY="533dp" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout2" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

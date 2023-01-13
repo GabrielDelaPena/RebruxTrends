@@ -19,4 +19,9 @@
     <string name="str_btn_send">Send</string>
     <string name="str_or">or</string>
     <string name="str_forgotpassword">Forgot password</string>
+    <string name="str_user_profile">User Profile</string>
+    <string name="str_totel_points">Total Points</string>
+    <string name="str_btn_my_reports">My Reports</string>
+    <string name="str_btn_logout">Logout</string>
+    <string name="str_btn_details">Details</string>
 </resources>

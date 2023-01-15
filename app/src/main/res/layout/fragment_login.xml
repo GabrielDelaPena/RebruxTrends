@@ -98,7 +98,7 @@ app:layout_constraintTop_toBottomOf="@+id/str_sub_rebrux" />
         android:id="@+id/btn_login"
         android:layout_width="200dp"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
+        android:layout_marginBottom="32dp"
         android:fontFamily="@font/poppins_medium"
         android:text="@string/str_btn_login"
         android:textAllCaps="false"
@@ -106,67 +106,12 @@ app:layout_constraintTop_toBottomOf="@+id/str_sub_rebrux" />
         android:textSize="@dimen/font_txt_big"
         app:backgroundTint="@color/green"
         app:cornerRadius="30dp"
-        app:layout_constraintBottom_toTopOf="@+id/linearLayout_social"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout_register_to_login"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         tools:ignore="TextContrastCheck" />
 
-<LinearLayout
-android:id="@+id/linearLayout_social"
-android:layout_width="wrap_content"
-android:layout_height="0dp"
-android:layout_marginBottom="16dp"
-android:orientation="horizontal"
-android:visibility="visible"
-app:layout_constraintBottom_toTopOf="@+id/linearLayout_register_to_login"
-app:layout_constraintEnd_toEndOf="parent"
-app:layout_constraintStart_toStartOf="parent">
-
-<ImageButton
-    android:id="@+id/ic_google"
-    android:layout_width="wrap_content"
-    android:layout_height="48dp"
-    android:layout_weight="1"
-    android:background="@drawable/btn_border"
-    android:contentDescription="google icon"
-    android:paddingLeft="30dp"
-    android:paddingTop="10dp"
-    android:paddingRight="30dp"
-    android:paddingBottom="10dp"
-    app:srcCompat="@drawable/ic_google" />
-
-<ImageButton
-    android:id="@+id/ic_facebook"
-    android:layout_width="wrap_content"
-    android:layout_height="48dp"
-    android:layout_marginStart="24dp"
-    android:layout_marginLeft="24dp"
-    android:layout_marginEnd="24dp"
-    android:layout_marginRight="24dp"
-    android:layout_weight="1"
-    android:background="@drawable/btn_border"
-    android:contentDescription="facebook icon"
-    android:paddingLeft="30dp"
-    android:paddingTop="10dp"
-    android:paddingRight="30dp"
-    android:paddingBottom="10dp"
-    app:srcCompat="@drawable/ic_facebook" />
-
-<ImageButton
-    android:id="@+id/ic_twitter"
-    android:layout_width="wrap_content"
-    android:layout_height="48dp"
-    android:layout_weight="1"
-    android:background="@drawable/btn_border"
-    android:contentDescription="twitter icon"
-    android:paddingLeft="30dp"
-    android:paddingTop="10dp"
-    android:paddingRight="30dp"
-    android:paddingBottom="10dp"
-    app:srcCompat="@drawable/ic_twitter" />
-</LinearLayout>
-
-<LinearLayout
+    <LinearLayout
 android:id="@+id/linearLayout_register_to_login"
 android:layout_width="wrap_content"
 android:layout_height="19dp"

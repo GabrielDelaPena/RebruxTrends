@@ -30,4 +30,12 @@
     <string name="str_btn_change_password">Change Password</string>
     <string name="str_input_new_password">new password</string>
     <string name="str_input_confirm_password">confirm password</string>
+    <string name="str_garbage">Garbage</string>
+    <string name="str_btn_cleaned">Cleaned</string>
+    <string name="str_update_map">Update the map</string>
+    <string name="str_my_location">This app uses your current location</string>
+    <string name="str_report_info">Tablings are public. Your username wil appear in the report</string>
+    <string name="str_btn_camera">Camera</string>
+    <string name="str_description">Add a description</string>
+    <string name="str_add_picture">Add a picture</string>
 </resources>

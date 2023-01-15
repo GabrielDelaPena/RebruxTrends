@@ -84,16 +84,16 @@ public class AddFragment extends Fragment {
     ) {
         binding = FragmentAddBinding.inflate(inflater, container, false);
         save = binding.btnAddSave;
-        image = binding.etAddImage;
+        //image = binding.etAddImage;
         description = binding.etAddDescription;
 
         tv_street = binding.tvAddStreet;
         tv_zip = binding.tvAddZip;
         tv_city = binding.tvAddCity;
 
-        tv_lat = binding.tvAddLat;
-        tv_lon = binding.tvAddLon;
-        tv_userID = binding.tvAddUserid;
+        //tv_lat = binding.tvAddLat;
+        //tv_lon = binding.tvAddLon;
+        //tv_userID = binding.tvAddUserid;
         return binding.getRoot();
 
     }
@@ -107,9 +107,9 @@ public class AddFragment extends Fragment {
         tv_zip.setText(zip);
         tv_city.setText(city);
 
-        tv_lat.setText(String.valueOf(currentLocation.getLatitude()));
-        tv_lon.setText(String.valueOf(currentLocation.getLongitude()));
-        tv_userID.setText(userID);
+        //tv_lat.setText(String.valueOf(currentLocation.getLatitude()));
+        //tv_lon.setText(String.valueOf(currentLocation.getLongitude()));
+        //tv_userID.setText(userID);
 
         save.setOnClickListener(
                 (View v) -> {

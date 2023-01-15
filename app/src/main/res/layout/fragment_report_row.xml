@@ -35,7 +35,7 @@
             android:fontFamily="@font/poppins_medium"
             android:text="Somestreet 25"
             android:textColor="#000000"
-            android:textSize="18sp"
+            android:textSize="@dimen/font_txt_big"
             app:layout_constraintStart_toEndOf="@+id/imageView4"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -48,7 +48,7 @@
             android:fontFamily="@font/poppins_medium"
             android:text="Anderlecht"
             android:textColor="#000000"
-            android:textSize="18sp"
+            android:textSize="@dimen/font_txt_big"
             app:layout_constraintStart_toEndOf="@+id/imageView4"
             app:layout_constraintTop_toBottomOf="@+id/tv_report_street" />
 

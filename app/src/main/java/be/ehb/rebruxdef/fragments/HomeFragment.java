@@ -235,8 +235,8 @@ public class HomeFragment extends Fragment {
             public void onSuccess(Location location) {
                 if (location != null) {
                     currentLocation = location;
-                    //LatLng coorden = new LatLng(location.getLatitude(),location.getLongitude());
-                    LatLng coorden = new LatLng(50.8365808,4.308187);
+                    LatLng coorden = new LatLng(location.getLatitude(),location.getLongitude());
+                    //LatLng coorden = new LatLng(50.8365808,4.308187);
                     CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(coorden, 12);
                     mGoogleMap.animateCamera(cameraUpdate);
                 } else {

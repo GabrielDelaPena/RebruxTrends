@@ -42,6 +42,20 @@ public class ForgotpasswordFragment extends Fragment {
                 }
         );
 
+        binding.btnForgotpassToLogin.setOnClickListener(
+                (View v) -> {
+                    NavHostFragment.findNavController(ForgotpasswordFragment.this)
+                            .navigate(R.id.action_forgotpassword_to_login);
+                }
+        );
+
+        binding.btnFotgotpassToRegister.setOnClickListener(
+                (View v) -> {
+                    NavHostFragment.findNavController(ForgotpasswordFragment.this)
+                            .navigate(R.id.action_forgotpassword_to_register);
+                }
+        );
+
     }
 
 }

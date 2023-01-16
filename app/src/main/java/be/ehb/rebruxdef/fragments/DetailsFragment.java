@@ -9,6 +9,7 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
@@ -24,6 +25,8 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.constraintlayout.widget.ConstraintSet;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
@@ -47,8 +50,9 @@ public class DetailsFragment extends Fragment {
 
     private FragmentDetailsBinding binding;
     ImageView imageView;
-    TextView creator, street, zip, city, status, createdAt, description;
+    TextView creator, street, zip, city, status, createdAt, description, time;
     Button btnCleaned;
+    ConstraintLayout cleaned;
     Reports report = new Reports();
     int responseStatus;
     int StatusDelete;
@@ -67,6 +71,8 @@ public class DetailsFragment extends Fragment {
         createdAt = binding.tvDetailsCreatedAt;
         description = binding.tvDetailsDescription;
         btnCleaned = binding.btnDetailsCleaned;
+        cleaned = binding.constraintLayout3;
+        time = binding.tvDetailsTime;
         return binding.getRoot();
     }
 
@@ -125,6 +131,7 @@ public class DetailsFragment extends Fragment {
                     report.setZip(reportRaw.getString("zip"));
                     report.setCleaned(reportRaw.getBoolean("cleaned"));
                     report.setCreatedAt(reportRaw.getString("createdAt"));
+                    time.setText(reportRaw.getString("timeCreated"));
 
                 } catch (IOException e) {
                     e.printStackTrace();
@@ -144,8 +151,10 @@ public class DetailsFragment extends Fragment {
             city.setText(report.getCity());
             if (!report.getCleaned()) {
                 status.setText("Not Cleaned.");
+                cleaned.setBackgroundColor(Color.RED);
             } else {
                 status.setText("Cleaned.");
+                cleaned.setBackgroundColor(Color.GREEN);
             }
             createdAt.setText(report.getCreatedAt());
             description.setText(report.getDescription());

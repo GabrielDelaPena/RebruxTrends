@@ -151,10 +151,10 @@ public class DetailsFragment extends Fragment {
             city.setText(report.getCity());
             if (!report.getCleaned()) {
                 status.setText("Not Cleaned.");
-                cleaned.setBackgroundColor(Color.RED);
+                cleaned.setBackgroundColor(getResources().getColor(R.color.red));
             } else {
                 status.setText("Cleaned.");
-                cleaned.setBackgroundColor(Color.GREEN);
+                cleaned.setBackgroundColor(getResources().getColor(R.color.green));
             }
             createdAt.setText(report.getCreatedAt());
             description.setText(report.getDescription());

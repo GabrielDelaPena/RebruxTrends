@@ -152,6 +152,7 @@ public class DetailsFragment extends Fragment {
             if (!report.getCleaned()) {
                 status.setText("Not Cleaned.");
                 cleaned.setBackgroundColor(getResources().getColor(R.color.red));
+
             } else {
                 status.setText("Cleaned.");
                 cleaned.setBackgroundColor(getResources().getColor(R.color.green));

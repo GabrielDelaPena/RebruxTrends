@@ -47,7 +47,6 @@ public class ProfileFragment extends Fragment {
         binding = FragmentProfileBinding.inflate(inflater, container, false);
         tv_username = binding.tvProfileUsername;
         tv_email = binding.tvProfileEmail;
-        tv_phone = binding.tvProfileNumber;
         tv_points = binding.tvProfilePoints;
         return binding.getRoot();
 
@@ -89,7 +88,6 @@ public class ProfileFragment extends Fragment {
             thread.join();
             tv_username.setText(user.getUsername());
             tv_email.setText(user.getEmail());
-            tv_phone.setText(user.getPhone());
             tv_points.setText(String.valueOf(user.getPoints()));
         } catch (InterruptedException e) {
             e.printStackTrace();

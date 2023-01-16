@@ -93,7 +93,7 @@ public class DetailsFragment extends Fragment {
                         public void run() {
                             onReportDeleteAPICall(bundle, handler.getActivityRef().get());
                         }
-                    }, 10000);
+                    }, 14400);
                 }
         );
 
@@ -190,7 +190,7 @@ public class DetailsFragment extends Fragment {
         try {
             thread.join();
             if (responseStatus == 200) {
-                Toast.makeText(getActivity(), "Report will be deleted shortly.", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), "Report will be deleted in a few hours.", Toast.LENGTH_SHORT).show();
                 replaceFragment(new HomeFragment());
             } else {
                 Toast.makeText(getActivity(), "Something went wrong", Toast.LENGTH_SHORT).show();

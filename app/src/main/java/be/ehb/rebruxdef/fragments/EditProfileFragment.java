@@ -38,7 +38,6 @@ public class EditProfileFragment extends Fragment {
         binding = FragmentEditProfileBinding.inflate(inflater, container, false);
         username = binding.profileEditUsername;
         email = binding.profileEditEmail;
-        phone = binding.profileEditPhone;
         return binding.getRoot();
 
     }

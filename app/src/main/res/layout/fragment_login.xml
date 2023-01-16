@@ -6,7 +6,20 @@
     android:layout_height="match_parent"
     tools:context=".fragments.LoginFragment">
 
-<TextView
+    <View
+        android:id="@+id/view8"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="150dp"
+        android:layout_marginBottom="150dp"
+        android:alpha="0.7"
+        android:background="@drawable/backgroundcirkles"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
 android:id="@+id/str_rebrux"
 android:layout_width="wrap_content"
 android:layout_height="wrap_content"

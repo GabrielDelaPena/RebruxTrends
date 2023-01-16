@@ -105,7 +105,7 @@ public class DetailsFragment extends Fragment {
 
     }
 
-    @SuppressLint("SetTextI18n")
+    @SuppressLint({"SetTextI18n", "ResourceAsColor"})
     public void onReportDetailsAPICall(Bundle bundleData) {
         Thread thread = new Thread(new Runnable() {
             @Override
@@ -154,7 +154,7 @@ public class DetailsFragment extends Fragment {
                 cleaned.setBackgroundColor(Color.RED);
             } else {
                 status.setText("Cleaned.");
-                cleaned.setBackgroundColor(Color.GREEN);
+                cleaned.setBackgroundColor(R.color.green);
             }
             createdAt.setText(report.getCreatedAt());
             description.setText(report.getDescription());

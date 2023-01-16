@@ -120,22 +120,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/input_email_register" />
 
-    <EditText
-        android:id="@+id/editTextPhone"
-        android:layout_width="300dp"
-        android:layout_height="48dp"
-        android:autofillHints=""
-        android:ems="10"
-        android:fontFamily="@font/poppins_light"
-        android:hint="@string/str_input_phone_number"
-        android:inputType="phone"
-        android:textColor="@color/dark"
-        android:textSize="@dimen/font_txt_nrml"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.504"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/input_passsword_register" />
-
     <Button
         android:id="@+id/btn_singup"
         android:layout_width="200dp"
@@ -150,7 +134,8 @@
         app:layout_constraintBottom_toTopOf="@+id/linearLayout_register_to_login"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextPhone"
+        app:layout_constraintTop_toBottomOf="@+id/input_passsword_register"
+        app:layout_constraintVertical_bias="0.75"
         tools:ignore="TextContrastCheck" />
 
     <LinearLayout
